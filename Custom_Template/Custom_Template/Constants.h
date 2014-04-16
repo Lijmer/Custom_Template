@@ -1,0 +1,7 @@
+#ifndef INCLUDED_CONSTANTS_H
+#define INCLUDED_CONSTANTS_H
+
+#define SCRWIDTH 640
+#define SCRHEIGHT 480
+
+#endif
