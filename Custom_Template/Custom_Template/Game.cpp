@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "SpriteRenderer.h"
+#include "GameObjectFactory.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -20,25 +21,25 @@ namespace game
     m_fps(0.0f),
     ExitGame(ExitGame)
   {
-    GameObject* go = new GameObject;
-    SpriteRenderer* spr = (SpriteRenderer*)go->AddComponent(SPRITE_RENDERER);
-    spr->SetSprite(engine::SPR::TEST);
-    go->AddComponent(RIGIDBODY);
-    go->SetName("PIE!");
-    m_objects.push_back(go);
+    COMPONENT_ID list1[] = {SPRITE_RENDERER, RIGIDBODY};
+    COMPONENT_ID list2[] = {TEXT_RENDERER, MOVE_COMPONENT, SPRITE_RENDERER};
 
-    go = new GameObject;
-    go->AddComponent(TEXT_RENDERER);
-    go->AddComponent(MOVE_COMPONENT);
-    spr = (SpriteRenderer*)go->AddComponent(SPRITE_RENDERER);
-    spr->SetSprite(engine::SPR::MISSING);
-    m_objects.push_back(go);
+    for(int i = 0; i < 100; ++i)
+    {
+      GameObject* go = game_object_factory::CreateGameObject("assets/myGameObject.go");
+      ((SpriteRenderer*)(go->GetComponent(SPRITE_RENDERER)))->SetSprite(engine::SPR::TEST);
+      go->SetName("PIE!");
+      go->GetTransform().position = float2(rand() % 100, rand() % 100);
+      m_objects.push_back(go);
+    }
+
+    m_objects.push_back(game_object_factory::CreateGameObject(list2, 3));
   }
 
   Game::~Game()
   {
     for(auto &i : m_objects)
-      delete i;
+      game_object_factory::DeleteGameObject(i);
   }
 
   void Game::Update()

@@ -27,7 +27,7 @@ namespace engine
       screen->Clear(0x000000);
       for(auto &i : spriteRenderElements)
       {
-        const Transform& trans = i->GetConstTransform();
+        const Transform& trans = i->GetTransform();
         const Sprite& sprite = i->GetSprite();
         sprite.Draw(screen, (int)trans.position.x, (int)trans.position.y, 0);
       }
@@ -35,7 +35,7 @@ namespace engine
 
       for(auto &i : TextEenderElements)
       {
-        const Transform& trans = i->GetConstTransform();
+        const Transform& trans = i->GetTransform();
         const char* strings = i->GetString();
         screen->Print(strings, (int)trans.position.x, (int)trans.position.y, 0xff00ff);
       }

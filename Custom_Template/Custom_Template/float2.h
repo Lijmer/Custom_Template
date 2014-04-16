@@ -12,6 +12,7 @@ const float2 operator+(const float2 &v1, const float2 &v2);
 const float2 operator-(const float2 &v);
 const float2 operator-(const float2 &v1, const float2 &v2);
 const float2 operator*(const float2 &v, const float f);
+const float2 operator*(const float f, const float2 &v);
 const float2 operator/(const float2 &v, const float f);
 
 class float2
@@ -166,6 +167,12 @@ inline const float2 operator*(const float2 &v, const float f)
 {
   return float2(v.x * f, v.y * f);
 }
+inline const float2 operator*(const float f, const float2 &v)
+{
+  return float2(v.x * f, v.y * f);
+}
+
+
 inline const float2 operator/(const float2 &v, const float f)
 {
   return float2(v.x / f, v.y / f);

@@ -11,7 +11,7 @@ public:
   ~Rigidbody();
   virtual void Update();
 private:
-  float2 m_prevPos;
+  float2 m_vel;
   float m_mass;
   float m_drag;
   bool m_useGravity;

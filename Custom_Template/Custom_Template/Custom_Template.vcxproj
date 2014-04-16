@@ -145,6 +145,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionHandler.cpp" />
+    <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="ComponentList.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionHandler.h" />
+    <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentID.h" />
     <ClInclude Include="ComponentList.h" />
     <ClInclude Include="Constants.h" />

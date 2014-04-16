@@ -16,7 +16,7 @@ namespace engine
     int GetWidth() const { return m_width; }
     int GetHeight() const { return m_height; }
     int GetPitch() const { return m_pitch; }
-    const Pixel* GetConstBuffer() const { return m_buffer; }
+    const Pixel* GetBuffer() const { return m_buffer; }
     Pixel* GetBuffer() { return m_buffer; }
 
     //setters

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace FF
+namespace ff
 {
 
   class XMLTree

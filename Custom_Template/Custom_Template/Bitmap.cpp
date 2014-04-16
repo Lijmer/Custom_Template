@@ -162,9 +162,10 @@ namespace engine
 
     for(int y = 0; y < srcHeight; ++y, dst += dstPitch, src += srcPitch)
     {
-      for(int x = 0; x < srcWidth; ++x)
-        if(src[x].pixel & 0xffffff)
-          dst[x] = src[x];
+      memcpy(dst, src, srcWidth * sizeof(Pixel));
+      //for(int x = 0; x < srcWidth; ++x)
+        //if(src[x].pixel & 0xffffff)
+         // dst[x] = src[x];
     }
       //memcpy(dst, src, srcWidth * sizeof(Pixel));
   }

@@ -102,6 +102,9 @@
     <ClCompile Include="XMLReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h">
@@ -218,11 +221,14 @@
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="XMLReader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentID.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

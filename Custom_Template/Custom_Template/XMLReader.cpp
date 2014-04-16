@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 
-namespace FF
+namespace ff
 {
   //TODO Refactor this spaghetti code.
   XMLTree::XMLTree(const std::string &filepath)

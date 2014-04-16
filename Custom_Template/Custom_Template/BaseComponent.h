@@ -18,9 +18,9 @@ public:
   virtual void Update() {}
   virtual void FixedUpdate() {}
 
-  const engine::Transform& GetConstTransform() const { return m_transform; }
-  const game::GameObject& GetConstGameObject() const { return m_gameObject; }
+  const engine::Transform& GetTransform() const { return m_transform; }
   engine::Transform& GetTransform() { return m_transform; }
+  const game::GameObject& GetGameObject() const { return m_gameObject; }
   game::GameObject& GetGameObject() { return m_gameObject; }
 
 protected:

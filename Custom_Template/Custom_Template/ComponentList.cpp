@@ -1,28 +1,6 @@
 #include "ComponentList.h"
-#include "TestComponent.h"
-#include "SpriteRenderer.h"
-#include "MoveComponent.h"
-#include "TextRenderer.h"
-#include "Rigidbody.h"
+#include "ComponentFactory.h"
 #include <cassert>
-
-BaseComponent* CreateComponent(COMPONENT_ID ID, engine::Transform &t, game::GameObject &g)
-{
-  switch(ID)
-  {
-  case RIGIDBODY: return new Rigidbody(t, g);
-  case SPRITE_RENDERER:
-    return new SpriteRenderer(t, g);
-  case TEXT_RENDERER:
-    return new TextRenderer(t, g);
-  case MOVE_COMPONENT:
-    return new MoveComponent(t, g);
-  case TEST:
-    return new TestComponent(t, g);
-  default:
-    return nullptr;
-  }
-}
 
 ComponentList::ComponentList()
 {
@@ -34,23 +12,26 @@ ComponentList::~ComponentList()
     delete i.second;
 }
 
-BaseComponent* ComponentList::AddComponent(COMPONENT_ID ID, engine::Transform &t, game::GameObject &g)
+BaseComponent* ComponentList::AddComponent(COMPONENT_ID ID,
+                                           engine::Transform &t,
+                                           game::GameObject &g)
 {
+  assert(ID >= 0 && ID < COMPONENT_ID_LIST_SIZE && "Not a valid componentID");
+  //assert(ID >= 0 && ID < COMPONENT_ID_LIST_SIZE, "banana");
   if(m_components[ID] != nullptr)
     RemoveComponent(ID);
-  return (m_components[ID] = CreateComponent(ID, t ,g));
+  return (m_components[ID] = component_factory::CreateComponent(ID, t, g));
 }
 
 void ComponentList::RemoveComponent(COMPONENT_ID ID)
 {
-  if(m_components[ID] != nullptr)
-    delete m_components[ID];
+  component_factory::DeleteComponent(m_components[ID]);
   m_components.erase(ID);
 }
 
 BaseComponent* ComponentList::GetComponent(COMPONENT_ID ID)
 {
-  assert(m_components[ID] != nullptr);
+  assert(m_components[ID] != nullptr && "Can't get a non existing component.");
   return m_components[ID];
 }
 
