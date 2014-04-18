@@ -10,7 +10,7 @@
 
 void ResolveCircleCircle(CircleCollider *col1, CircleCollider *col2)
 {
-  //Rigidbody *rb1 = col1->GetRigidbody(); col1 is guarenteed to have a rigidbody.
+  Rigidbody *rb1 = col1->GetRigidbody(); //col1 is guarenteed to have a rigidbody.
   Rigidbody *rb2 = col2->GetRigidbody();
   engine::Transform& tr1 = col1->GetTransform();
   engine::Transform& tr2 = col2->GetTransform();
@@ -25,8 +25,8 @@ void ResolveCircleCircle(CircleCollider *col1, CircleCollider *col2)
 
   if(rb2)
   {
-    tr1.position += deltaPos * factor * .5f;
-    tr2.position -= deltaPos * factor * .5f;
+    rb1->GetVelocity() += deltaPos * factor * .5f;
+    rb2->GetVelocity() -= deltaPos * factor * .5f;
   }
   else
     tr1.position += deltaPos * factor;

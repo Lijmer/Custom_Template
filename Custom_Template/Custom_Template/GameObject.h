@@ -14,6 +14,7 @@ namespace game
     void Update() { m_components.Update(); }
     void FixedUpdate() { m_components.FixedUpdate(); }
     BaseComponent* AddComponent(COMPONENT_ID ID) { return m_components.AddComponent(ID, m_transform, *this); }
+    BaseComponent* AddComponent(BaseComponent* c) { return m_components.AddComponent(c); }
     BaseComponent* GetComponent(COMPONENT_ID ID) { return m_components.GetComponent(ID); }
 
     const engine::Transform& GetTransform() const { return m_transform; }

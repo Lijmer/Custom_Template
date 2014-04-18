@@ -23,6 +23,8 @@ public:
   const game::GameObject& GetGameObject() const { return m_gameObject; }
   game::GameObject& GetGameObject() { return m_gameObject; }
 
+  COMPONENT_ID GetID() const { return m_ID; }
+
 protected:
   engine::Transform &m_transform;
   game::GameObject& m_gameObject;

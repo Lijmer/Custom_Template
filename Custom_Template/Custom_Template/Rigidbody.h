@@ -10,6 +10,10 @@ public:
   Rigidbody(engine::Transform&, game::GameObject&);
   ~Rigidbody();
   virtual void Update();
+
+  const float2& GetVelocity() const { return m_vel; }
+  float2& GetVelocity() { return m_vel; }
+
 private:
   float2 m_vel;
   float m_mass;

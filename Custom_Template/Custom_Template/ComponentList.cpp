@@ -1,5 +1,6 @@
 #include "ComponentList.h"
 #include "ComponentFactory.h"
+#include "BaseComponent.h"
 #include <cassert>
 
 ComponentList::ComponentList()
@@ -21,6 +22,13 @@ BaseComponent* ComponentList::AddComponent(COMPONENT_ID ID,
   if(m_components[ID] != nullptr)
     RemoveComponent(ID);
   return (m_components[ID] = component_factory::CreateComponent(ID, t, g));
+}
+
+BaseComponent* ComponentList::AddComponent(BaseComponent* c)
+{
+  if(m_components[c->GetID()] != nullptr)
+    RemoveComponent(c->GetID());
+  return (m_components[c->GetID()] = c);
 }
 
 void ComponentList::RemoveComponent(COMPONENT_ID ID)

@@ -5,6 +5,8 @@
 
 #include "XMLReader.h"
 
+#include "ComponentFactory.h"
+
 #include <map>
 
 namespace game_object_factory
@@ -36,7 +38,15 @@ namespace game_object_factory
     game::GameObject *retVal = new game::GameObject();
     std::vector<ff::XMLTree::Node*> &childeren = xmlTree.m_root->m_childeren;
     for(auto &i : childeren)
+    {
+      BaseComponent* component = component_factory::CreateComponent(
+        stringToComponentID[i->m_name],
+        retVal->GetTransform(),
+        *retVal
+        );
       retVal->AddComponent(stringToComponentID[i->m_name]);
+
+    }
     return retVal;
   }
 

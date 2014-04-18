@@ -2,14 +2,17 @@
 #define INCLUDED_COMPONENT_LIST_H
 
 #include <map>
-#include "BaseComponent.h"
-
+#include "ComponentID.h"
+class BaseComponent;
+namespace engine { struct Transform; }
+namespace game { class GameObject; }
 class ComponentList
 {
 public:
   ComponentList();
   ~ComponentList();
   BaseComponent* AddComponent(COMPONENT_ID, engine::Transform&, game::GameObject&);
+  BaseComponent* AddComponent(BaseComponent*);
   void RemoveComponent(COMPONENT_ID);
   BaseComponent* GetComponent(COMPONENT_ID);
 
@@ -20,4 +23,4 @@ private:
   std::map<COMPONENT_ID, BaseComponent*> m_components;
 };
 
-#endif//INCLUDED_COMPONENT_LIST_H
+#endif//  INCLUDED_COMPONENT_LIST_H
