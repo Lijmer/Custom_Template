@@ -1,23 +1,22 @@
 #ifndef INCLUDED_GAME_H
 #define INCLUDED_GAME_H
+
 #include <vector>
-namespace engine { class Bitmap; }
+
 namespace game
 {
   class GameObject;
+  struct GameImpl;
   class Game
   {
   public:
-    Game(void(*ExitGame)());
+    Game();
     ~Game();
-
     void Update();
-    void Draw(engine::Bitmap &screen);
-
+    void FixedUpdate();
   private:
     std::vector<GameObject*> m_objects;
-    float m_fps;
-    void(*ExitGame)();
+
   };
 }
 

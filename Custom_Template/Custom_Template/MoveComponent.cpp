@@ -15,6 +15,6 @@ void MoveComponent::Update()
   static float fps;
   fps = .99f * fps + .01f * (1.0f / time::GetDeltaTime());
   char str[64];
-  sprintf_s(str, "FPS: %d", (int)fps);
+  sprintf_s(str, "FPS: %d ####", (int)fps);
   t->SetString(str);
 }

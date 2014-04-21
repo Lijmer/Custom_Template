@@ -9,7 +9,7 @@
 
 #include <map>
 
-namespace game_object_factory
+namespace gof
 {
   std::map<std::string, COMPONENT_ID> stringToComponentID;
 
@@ -28,6 +28,7 @@ namespace game_object_factory
 
   game::GameObject*  CreateGameObject(const char* filepath)
   {
+  
     static const bool inited = Init();
     ff::XMLTree xmlTree(filepath);
     if(xmlTree.m_root->m_name != "GameObject")
@@ -45,7 +46,7 @@ namespace game_object_factory
         *retVal
         );
       retVal->AddComponent(stringToComponentID[i->m_name]);
-
+      component->Start();
     }
     return retVal;
   }

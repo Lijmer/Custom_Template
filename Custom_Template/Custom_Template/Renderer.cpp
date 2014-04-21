@@ -35,9 +35,11 @@ namespace engine
 
       for(auto &i : TextEenderElements)
       {
+        const char* string = i->GetString();
+        if(string == nullptr)
+          continue;
         const Transform& trans = i->GetTransform();
-        const char* strings = i->GetString();
-        screen->Print(strings, (int)trans.position.x, (int)trans.position.y, 0xff00ff);
+        screen->Print(string, (int)trans.position.x, (int)trans.position.y, 0xff00ff);
       }
       TextEenderElements.clear();
     }

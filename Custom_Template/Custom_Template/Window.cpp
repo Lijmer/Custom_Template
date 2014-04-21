@@ -1,11 +1,8 @@
-//#undef UNICODE
 #include "Window.h"
 #include "WindowImpl.h"
 #include "Bitmap.h"
-//#include <SDL.h>
 #include <SDL_syswm.h>
 #include <cstdio>
-//#include <Windows.h>
 
 PFNGLGENBUFFERSPROC glGenBuffers = nullptr;
 PFNGLBINDBUFFERPROC glBindBuffer = nullptr;
@@ -22,14 +19,17 @@ using namespace engine;
 
 bool InitBufferFuncs()
 {
-  glGenBuffers = (PFNGLGENBUFFERSPROC)wglGetProcAddress("glGenBuffersARB");
-  glBindBuffer = (PFNGLBINDBUFFERPROC)wglGetProcAddress("glBindBufferARB");
-  glBufferData = (PFNGLBUFFERDATAPROC)wglGetProcAddress("glBufferDataARB");
-  glMapBuffer = (PFNGLMAPBUFFERPROC)wglGetProcAddress("glMapBufferARB");
-  glUnmapBuffer = (PFNGLUNMAPBUFFERPROC)wglGetProcAddress("glUnmapBufferARB");
-  glDeleteBuffers = (PFNGLDELETEBUFFERSPROC)wglGetProcAddress("glDeleteBuffersARB");
+  glGenBuffers = (PFNGLGENBUFFERSPROC)wglGetProcAddress("glGenBuffers");
+  glBindBuffer = (PFNGLBINDBUFFERPROC)wglGetProcAddress("glBindBuffer");
+  glBufferData = (PFNGLBUFFERDATAPROC)wglGetProcAddress("glBufferData");
+  glMapBuffer = (PFNGLMAPBUFFERPROC)wglGetProcAddress("glMapBuffer");
+  glUnmapBuffer = (PFNGLUNMAPBUFFERPROC)wglGetProcAddress("glUnmapBuffer");
+  glDeleteBuffers = (PFNGLDELETEBUFFERSPROC)wglGetProcAddress("glDeleteBuffers");
   wglSwapIntervalEXT = (PFNWGLSWAPINTERVALFARPROC)wglGetProcAddress("wglSwapIntervalEXT");
-  if((!glGenBuffers) || (!glBindBuffer) || (!glBufferData) || (!glMapBuffer) || (!glUnmapBuffer) || (!glDeleteBuffers))
+  if((!glGenBuffers) || (!glBindBuffer) || (!glBufferData) ||
+     (!glMapBuffer) || (!glUnmapBuffer) || (!glDeleteBuffers))
+    return false;
+  if(!wglSwapIntervalEXT)
     return false;
   if(glGetError()) return false;
   return true;
@@ -54,19 +54,22 @@ bool CreateFBTexture(WindowImpl* p)
       return false;
     }
   }
-  const int sizeMemory = 4 * p->m_width * p->m_height;
+  const int sizeMemory = sizeof(Pixel) * p->m_width * p->m_height;
   glGenBuffers(2, p->m_fbPBO);
-  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, p->m_fbPBO[0]);
-  glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, sizeMemory, NULL, GL_STREAM_DRAW_ARB);
-  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, p->m_fbPBO[1]);
-  glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, sizeMemory, NULL, GL_STREAM_DRAW_ARB);
-  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
+  glBindBuffer(GL_PIXEL_UNPACK_BUFFER, p->m_fbPBO[0]);
+  glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeMemory, NULL, GL_STREAM_DRAW);
+  glBindBuffer(GL_PIXEL_UNPACK_BUFFER, p->m_fbPBO[1]);
+  glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeMemory, NULL, GL_STREAM_DRAW);
+  glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+
   glBindTexture(GL_TEXTURE_2D, p->m_framebufferTexID[0]);
-  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, p->m_fbPBO[0]);
-  void* frameData = glMapBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, GL_WRITE_ONLY_ARB);
+  glBindBuffer(GL_PIXEL_UNPACK_BUFFER, p->m_fbPBO[0]);
+  void* frameData = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
+
   if(!frameData) return false;
+
   memset(frameData, 0x0, sizeMemory);
-  glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER_ARB);
+  glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
   return (glGetError() == 0);
 }
 
@@ -82,13 +85,17 @@ Window::Window(int width, int height, const char* caption)
     return;
   }
   windowInited = true;
-  SDL_Init(SDL_INIT_VIDEO);
+  SDL_Init(SDL_INIT_EVERYTHING);
   SDL_EnableKeyRepeat(0, 0);
   p->m_width = width;
   p->m_height = height;
   p->m_SDLWindow = SDL_SetVideoMode(width, height, 32, SDL_OPENGL);
   
-  InitBufferFuncs();
+  if(!InitBufferFuncs())
+  {
+    printf("Failed to get all buffer function adresses.\n");
+    return;
+  }
 
   p->m_fbPBO[0] = p->m_fbPBO[1] = 0xffffffff;
   glEnable(GL_TEXTURE_2D);
@@ -109,8 +116,6 @@ Window::Window(int width, int height, const char* caption)
   glClear(GL_COLOR_BUFFER_BIT);
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-  //SDL_GL_SetSwapInterval(0);
-  //SDL_GL_Se
   wglSwapIntervalEXT(0);
   glDisable(GL_TEXTURE_2D);
   p->m_frameBuffer = new Bitmap(width, height, width, nullptr);
@@ -158,15 +163,14 @@ void Window::Draw(void(*RenderFunc)(Bitmap*))
 
   
   index = (index + 1) & 1; //add one, if 2 make it 0
-  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, p->m_fbPBO[index]);
-  p->m_frameBuffer->SetBuffer((Pixel*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, GL_WRITE_ONLY_ARB));
+  glBindBuffer(GL_PIXEL_UNPACK_BUFFER, p->m_fbPBO[index]);
+  p->m_frameBuffer->SetBuffer((Pixel*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY));
   RenderFunc(p->m_frameBuffer);
-  glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER_ARB);
+  glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
   
   glBindTexture(GL_TEXTURE_2D, p->m_framebufferTexID[index]);
-  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, p->m_fbPBO[index]);
+  glBindBuffer(GL_PIXEL_UNPACK_BUFFER, p->m_fbPBO[index]);
   glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, p->m_width, p->m_height, GL_BGRA, GL_UNSIGNED_BYTE, 0);
-
 }
 
 void Window::SetCaption(const char* caption)

@@ -230,5 +230,8 @@
     <ClInclude Include="ComponentID.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

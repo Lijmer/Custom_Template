@@ -15,8 +15,10 @@ public:
   {}
   virtual ~BaseComponent() {}
 
+  virtual void Start() {}
   virtual void Update() {}
   virtual void FixedUpdate() {}
+  virtual void OnDestroy() {}
 
   const engine::Transform& GetTransform() const { return m_transform; }
   engine::Transform& GetTransform() { return m_transform; }

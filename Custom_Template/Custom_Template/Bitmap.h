@@ -35,8 +35,6 @@ namespace engine
 
 
 
-    static void InitCharset();
-    static void SetChar(int c, char* c1, char* c2, char *c3, char *c4, char *c5);
 
   private:
     int m_width, m_height, m_pitch;
@@ -46,6 +44,8 @@ namespace engine
     // Static attributes for the buildin font
     static char s_font[51][5][5];
     static int s_transl[256];
+    static bool InitCharset();
+    static void SetChar(int c, char* c1, char* c2, char *c3, char *c4, char *c5);
   };
 
 }

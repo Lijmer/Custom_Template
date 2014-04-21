@@ -53,6 +53,7 @@ namespace engine
 
   void Bitmap::Print(const char* string, int x, int y, Pixel color)
   {
+    static bool runOnce = InitCharset();
     Pixel* t = m_buffer + x + y * m_pitch;
     for(unsigned i = 0, len = strlen(string); i < len; ++i)
     {
@@ -83,62 +84,63 @@ namespace engine
     memcpy(s_font[c][4], c5, 5);
   }
 
-  void Bitmap::InitCharset()
+  bool Bitmap::InitCharset()
   {
-    SetChar(0, ":ooo:", "o:::o", "ooooo", "o:::o", "o:::o");
-    SetChar(1, "oooo:", "o:::o", "oooo:", "o:::o", "oooo:");
-    SetChar(2, ":oooo", "o::::", "o::::", "o::::", ":oooo");
-    SetChar(3, "oooo:", "o:::o", "o:::o", "o:::o", "oooo:");
-    SetChar(4, "ooooo", "o::::", "oooo:", "o::::", "ooooo");
-    SetChar(5, "ooooo", "o::::", "ooo::", "o::::", "o::::");
-    SetChar(6, ":oooo", "o::::", "o:ooo", "o:::o", ":ooo:");
-    SetChar(7, "o:::o", "o:::o", "ooooo", "o:::o", "o:::o");
-    SetChar(8, "::o::", "::o::", "::o::", "::o::", "::o::");
-    SetChar(9, ":::o:", ":::o:", ":::o:", ":::o:", "ooo::");
-    SetChar(10, "o::o:", "o:o::", "oo:::", "o:o::", "o::o:");
-    SetChar(11, "o::::", "o::::", "o::::", "o::::", "ooooo");
-    SetChar(12, "oo:o:", "o:o:o", "o:o:o", "o:::o", "o:::o");
-    SetChar(13, "o:::o", "oo::o", "o:o:o", "o::oo", "o:::o");
-    SetChar(14, ":ooo:", "o:::o", "o:::o", "o:::o", ":ooo:");
-    SetChar(15, "oooo:", "o:::o", "oooo:", "o::::", "o::::");
-    SetChar(16, ":ooo:", "o:::o", "o:::o", "o::oo", ":oooo");
-    SetChar(17, "oooo:", "o:::o", "oooo:", "o:o::", "o::o:");
-    SetChar(18, ":oooo", "o::::", ":ooo:", "::::o", "oooo:");
-    SetChar(19, "ooooo", "::o::", "::o::", "::o::", "::o::");
-    SetChar(20, "o:::o", "o:::o", "o:::o", "o:::o", ":oooo");
-    SetChar(21, "o:::o", "o:::o", ":o:o:", ":o:o:", "::o::");
-    SetChar(22, "o:::o", "o:::o", "o:o:o", "o:o:o", ":o:o:");
-    SetChar(23, "o:::o", ":o:o:", "::o::", ":o:o:", "o:::o");
-    SetChar(24, "o:::o", "o:::o", ":oooo", "::::o", ":ooo:");
-    SetChar(25, "ooooo", ":::o:", "::o::", ":o:::", "ooooo");
-    SetChar(26, ":ooo:", "o::oo", "o:o:o", "oo::o", ":ooo:");
-    SetChar(27, "::o::", ":oo::", "::o::", "::o::", ":ooo:");
-    SetChar(28, ":ooo:", "o:::o", "::oo:", ":o:::", "ooooo");
-    SetChar(29, "oooo:", "::::o", "::oo:", "::::o", "oooo:");
-    SetChar(30, "o::::", "o::o:", "ooooo", ":::o:", ":::o:");
-    SetChar(31, "ooooo", "o::::", "oooo:", "::::o", "oooo:");
-    SetChar(32, ":oooo", "o::::", "oooo:", "o:::o", ":ooo:");
-    SetChar(33, "ooooo", "::::o", ":::o:", "::o::", "::o::");
-    SetChar(34, ":ooo:", "o:::o", ":ooo:", "o:::o", ":ooo:");
-    SetChar(35, ":ooo:", "o:::o", ":oooo", "::::o", ":ooo:");
-    SetChar(36, "::o::", "::o::", "::o::", ":::::", "::o::");
-    SetChar(37, ":ooo:", "::::o", ":::o:", ":::::", "::o::");
-    SetChar(38, ":::::", ":::::", "::o::", ":::::", "::o::");
-    SetChar(39, ":::::", ":::::", ":ooo:", ":::::", ":ooo:");
-    SetChar(40, ":::::", ":::::", ":::::", ":::o:", "::o::");
-    SetChar(41, ":::::", ":::::", ":::::", ":::::", "::o::");
-    SetChar(42, ":::::", ":::::", ":ooo:", ":::::", ":::::");
-    SetChar(43, ":::o:", "::o::", "::o::", "::o::", ":::o:");
-    SetChar(44, "::o::", ":::o:", ":::o:", ":::o:", "::o::");
-    SetChar(45, ":::::", ":::::", ":::::", ":::::", ":::::");
-    SetChar(46, "ooooo", "ooooo", "ooooo", "ooooo", "ooooo");
-    SetChar(47, "::o::", "::o::", ":::::", ":::::", ":::::"); // Tnx Ferry
-    SetChar(48, "o:o:o", ":ooo:", "ooooo", ":ooo:", "o:o:o");
-    SetChar(49, "::::o", ":::o:", "::o::", ":o:::", "o::::");
+    SetChar(0, ":ooo:", "o:::o", "ooooo", "o:::o", "o:::o"); // A
+    SetChar(1, "oooo:", "o:::o", "oooo:", "o:::o", "oooo:"); // B
+    SetChar(2, ":oooo", "o::::", "o::::", "o::::", ":oooo"); // C
+    SetChar(3, "oooo:", "o:::o", "o:::o", "o:::o", "oooo:"); // D
+    SetChar(4, "ooooo", "o::::", "oooo:", "o::::", "ooooo"); // E
+    SetChar(5, "ooooo", "o::::", "ooo::", "o::::", "o::::"); // F
+    SetChar(6, ":oooo", "o::::", "o:ooo", "o:::o", ":ooo:"); // G
+    SetChar(7, "o:::o", "o:::o", "ooooo", "o:::o", "o:::o"); // H
+    SetChar(8, "::o::", "::o::", "::o::", "::o::", "::o::"); // I
+    SetChar(9, ":::o:", ":::o:", ":::o:", ":::o:", "ooo::"); // J
+    SetChar(10, "o::o:", "o:o::", "oo:::", "o:o::", "o::o:");// K
+    SetChar(11, "o::::", "o::::", "o::::", "o::::", "ooooo");// L
+    SetChar(12, "oo:o:", "o:o:o", "o:o:o", "o:::o", "o:::o");// M
+    SetChar(13, "o:::o", "oo::o", "o:o:o", "o::oo", "o:::o");// N
+    SetChar(14, ":ooo:", "o:::o", "o:::o", "o:::o", ":ooo:");// O
+    SetChar(15, "oooo:", "o:::o", "oooo:", "o::::", "o::::");// P
+    SetChar(16, ":ooo:", "o:::o", "o:::o", "o::oo", ":oooo");// Q
+    SetChar(17, "oooo:", "o:::o", "oooo:", "o:o::", "o::o:");// R
+    SetChar(18, ":oooo", "o::::", ":ooo:", "::::o", "oooo:");// S
+    SetChar(19, "ooooo", "::o::", "::o::", "::o::", "::o::");// T
+    SetChar(20, "o:::o", "o:::o", "o:::o", "o:::o", ":oooo");// U
+    SetChar(21, "o:::o", "o:::o", ":o:o:", ":o:o:", "::o::");// V
+    SetChar(22, "o:::o", "o:::o", "o:o:o", "o:o:o", ":o:o:");// W
+    SetChar(23, "o:::o", ":o:o:", "::o::", ":o:o:", "o:::o");// X
+    SetChar(24, "o:::o", "o:::o", ":oooo", "::::o", ":ooo:");// Y
+    SetChar(25, "ooooo", ":::o:", "::o::", ":o:::", "ooooo");// Z
+    SetChar(26, ":ooo:", "o::oo", "o:o:o", "oo::o", ":ooo:");// 0
+    SetChar(27, "::o::", ":oo::", "::o::", "::o::", ":ooo:");// 1
+    SetChar(28, ":ooo:", "o:::o", "::oo:", ":o:::", "ooooo");// 2
+    SetChar(29, "oooo:", "::::o", "::oo:", "::::o", "oooo:");// 3
+    SetChar(30, "o::::", "o::o:", "ooooo", ":::o:", ":::o:");// 4
+    SetChar(31, "ooooo", "o::::", "oooo:", "::::o", "oooo:");// 5
+    SetChar(32, ":oooo", "o::::", "oooo:", "o:::o", ":ooo:");// 6
+    SetChar(33, "ooooo", "::::o", ":::o:", "::o::", "::o::");// 7
+    SetChar(34, ":ooo:", "o:::o", ":ooo:", "o:::o", ":ooo:");// 8
+    SetChar(35, ":ooo:", "o:::o", ":oooo", "::::o", ":ooo:");// 9
+    SetChar(36, "::o::", "::o::", "::o::", ":::::", "::o::");// !
+    SetChar(37, ":ooo:", "::::o", ":::o:", ":::::", "::o::");// ?
+    SetChar(38, ":::::", ":::::", "::o::", ":::::", "::o::");// :
+    SetChar(39, ":::::", ":::::", ":ooo:", ":::::", ":ooo:");// =
+    SetChar(40, ":::::", ":::::", ":::::", ":::o:", "::o::");// ,
+    SetChar(41, ":::::", ":::::", ":::::", ":::::", "::o::");// .
+    SetChar(42, ":::::", ":::::", ":ooo:", ":::::", ":::::");// -
+    SetChar(43, ":::o:", "::o::", "::o::", "::o::", ":::o:");// (
+    SetChar(44, "::o::", ":::o:", ":::o:", ":::o:", "::o::");// )
+    SetChar(45, ":::::", ":::::", ":::::", ":::::", ":::::");//  
+    SetChar(46, ":o:o:", "ooooo", ":o:o:", "ooooo", ":o:o:");// # //fixed it :D
+    SetChar(47, "::o::", "::o::", ":::::", ":::::", ":::::");// ' Tnx Ferry
+    SetChar(48, "o:o:o", ":ooo:", "ooooo", ":ooo:", "o:o:o");// *
+    SetChar(49, "::::o", ":::o:", "::o::", ":o:::", "o::::");// /
     char c[] = "abcdefghijklmnopqrstuvwxyz0123456789!?:=,.-() #'*/";
     int i;
     for(i = 0; i < 256; i++) s_transl[i] = 45;
     for(i = 0; i < 50; i++) s_transl[(unsigned char)c[i]] = i;
+    return true;
   }
 
   void Bitmap::Draw(Bitmap *target, int ax, int ay) const

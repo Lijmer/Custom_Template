@@ -186,6 +186,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Renderer.h" />

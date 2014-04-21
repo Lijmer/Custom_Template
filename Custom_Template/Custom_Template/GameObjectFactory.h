@@ -3,7 +3,7 @@
 
 namespace game { class GameObject; }
 enum COMPONENT_ID;
-namespace game_object_factory
+namespace gof
 {
   game::GameObject* CreateGameObject(const char *filepath);
   game::GameObject* CreateGameObject(COMPONENT_ID *ComponentIDList, int size);
