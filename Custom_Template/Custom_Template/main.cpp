@@ -20,7 +20,12 @@ void Exit() { g_running = false; }
 int main(int, char**)
 {
   Window window(SCRWIDTH, SCRHEIGHT, "Custom_Template");
+
+  game::Game game;
+  g_game = &game;
+
   time::impl::Init();
+  time::impl::SetFixedUpdateCallback([](){g_game->FixedUpdate(); });
 
   event_handler::SetWindowCloseCallback(&Exit);
   event_handler::SetKeyDownCallback(&input::impl::OnKeyDown);
@@ -29,19 +34,17 @@ int main(int, char**)
   event_handler::SetMouseButtonDownCallback(&input::impl::OnMouseButtonDown);
   event_handler::SetMouseButtonUpCallback(&input::impl::OnMouseButtonUp);
 
-  game::Game game;
-  g_game = &game;
 
   while(g_running)
   {
-    window.Draw(&renderer::Render);
+    //window.Draw(&renderer::Render);
     input::impl::OnUpdate();
     event_handler::Update();
     time::impl::Update();
     game.Update();
     collision_handler::Update();
+    window.Draw(&renderer::Render);
   }
-  Exit();
-
+  
   return (int)(g_game = nullptr);
 }

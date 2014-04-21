@@ -7,6 +7,8 @@ namespace time
   {
     void Init();
     void Update();
+
+    void SetFixedUpdateCallback(void(*f)());
   }
 }
 

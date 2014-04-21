@@ -160,9 +160,9 @@ void Window::Draw(void(*RenderFunc)(Bitmap*))
   glEnd();
   glBindTexture(GL_TEXTURE_2D, 0);
   SDL_GL_SwapBuffers();
+  ++index;
+  index &= 1; //if 2, make it 0
 
-  
-  index = (index + 1) & 1; //add one, if 2 make it 0
   glBindBuffer(GL_PIXEL_UNPACK_BUFFER, p->m_fbPBO[index]);
   p->m_frameBuffer->SetBuffer((Pixel*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY));
   RenderFunc(p->m_frameBuffer);
