@@ -1,5 +1,5 @@
 #include "CollisionHandler.h"
-#include "Collider.h"
+#include "../Components/Collider.h"
 #include "Collision.h"
 #include <vector>
 

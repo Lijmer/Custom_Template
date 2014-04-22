@@ -10,8 +10,8 @@ static LARGE_INTEGER nextGameTick;
 
 static void(*fixedUpdateFunctor)();
 
-static float currentTime;
 static float deltaTime;
+static float currentTime;
 
 
 namespace time
@@ -25,7 +25,7 @@ namespace time
       QueryPerformanceCounter(&initTime);
       QueryPerformanceCounter(&lastUpdate);
       nextGameTick.QuadPart = lastUpdate.QuadPart + updateDelay.QuadPart;
-      updateDelay.QuadPart = (long long)(.2 * ticksPerSecond.QuadPart);
+      updateDelay.QuadPart = (long long)(ticksPerSecond.QuadPart / 60);
     }
 
     void Update()

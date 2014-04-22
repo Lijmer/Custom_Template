@@ -1,14 +1,16 @@
 // Template by Max Oomen - 2014
 // Based on the template by Jacco Bikker - 2006-2014
-#include "Window.h"
+#include <SDL_main.h>
+#include "../Renderer/Window.h"
 #include "Constants.h"
-#include "Bitmap.h"
+#include "../Renderer/Bitmap.h"
 #include "TimeImpl.h"
-#include "EventHandler.h"
-#include "Game.h"
-#include "Renderer.h"
-#include "InputImpl.h"
+#include "../Input/EventHandler.h"
+#include "../Game/Game.h"
+#include "../Renderer/Renderer.h"
+#include "../Input/InputImpl.h"
 #include "CollisionHandler.h"
+#include "../Game/test.h"
 
 using namespace engine;
 
@@ -17,12 +19,12 @@ static bool g_running = true;
 
 void Exit() { g_running = false; }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 int main(int, char**)
 {
   Window window(SCRWIDTH, SCRHEIGHT, "Custom_Template");
-
-  game::Game game;
-  g_game = &game;
 
   time::impl::Init();
   time::impl::SetFixedUpdateCallback([](){g_game->FixedUpdate(); });
@@ -33,11 +35,12 @@ int main(int, char**)
   event_handler::SetMouseMotionCallback(&input::impl::OnMouseMotion);
   event_handler::SetMouseButtonDownCallback(&input::impl::OnMouseButtonDown);
   event_handler::SetMouseButtonUpCallback(&input::impl::OnMouseButtonUp);
-
+  Test();
+  game::Game game;
+  g_game = &game;
 
   while(g_running)
   {
-    //window.Draw(&renderer::Render);
     input::impl::OnUpdate();
     event_handler::Update();
     time::impl::Update();
@@ -45,6 +48,6 @@ int main(int, char**)
     collision_handler::Update();
     window.Draw(&renderer::Render);
   }
-  
+
   return (int)(g_game = nullptr);
 }
