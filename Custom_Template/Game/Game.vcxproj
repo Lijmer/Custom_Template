@@ -117,30 +117,60 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="CollisionHandler.cpp" />
+    <ClCompile Include="ComponentFactory.cpp" />
+    <ClCompile Include="ComponentList.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="TestComponent.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API.h" />
+    <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="CapsuleCollider.h" />
+    <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="CollisionHandler.h" />
+    <ClInclude Include="ComponentFactory.h" />
+    <ClInclude Include="ComponentID.h" />
+    <ClInclude Include="ComponentList.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="test.h" />
+    <ClInclude Include="TestComponent.h" />
+    <ClInclude Include="TextRenderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Components\Components.vcxproj">
-      <Project>{17d4ab6e-6b69-4234-9771-8050927ffe3a}</Project>
+    <ProjectReference Include="..\Input\Input.vcxproj">
+      <Project>{fdc79ff8-2a5f-4b5c-b757-fc8d1f9bdf2a}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\Input\Input.vcxproj">
-      <Project>{fdc79ff8-2a5f-4b5c-b757-fc8d1f9bdf2a}</Project>
+    <ProjectReference Include="..\Renderer\Renderer.vcxproj">
+      <Project>{414f59b7-f8b2-4cef-9ae0-624e0073715d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
+      <Project>{ae40c3b0-0c12-4f1e-b732-26017028103f}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>

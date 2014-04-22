@@ -139,33 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="CollisionHandler.cpp" />
-    <ClCompile Include="EventHandler.cpp" />
-    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="StringFunctions.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="XMLReader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="CollisionHandler.h" />
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="CycleTimer.h" />
-    <ClInclude Include="EventHandler.h" />
-    <ClInclude Include="float2.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Physics.h" />
-    <ClInclude Include="StringFunctions.h" />
-    <ClInclude Include="TimeImpl.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="InputImpl.h" />
-    <ClInclude Include="Math.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Types.h" />
-    <ClInclude Include="XMLReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game\Game.vcxproj">
@@ -186,6 +163,14 @@
     </ProjectReference>
     <ProjectReference Include="..\Renderer\Renderer.vcxproj">
       <Project>{414f59b7-f8b2-4cef-9ae0-624e0073715d}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
+      <Project>{ae40c3b0-0c12-4f1e-b732-26017028103f}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>

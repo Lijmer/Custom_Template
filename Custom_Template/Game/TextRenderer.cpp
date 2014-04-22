@@ -1,5 +1,5 @@
 #include "TextRenderer.h"
-#include "StringFunctions.h"
+#include "../Utilities/StringFunctions.h"
 #include "../Renderer/renderer.h"
 
 TextRenderer::~TextRenderer()

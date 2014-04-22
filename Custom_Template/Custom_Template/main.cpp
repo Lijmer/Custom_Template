@@ -1,16 +1,16 @@
 // Template by Max Oomen - 2014
 // Based on the template by Jacco Bikker - 2006-2014
 #include <SDL_main.h>
-#include "../Renderer/Window.h"
-#include "Constants.h"
-#include "../Renderer/Bitmap.h"
-#include "TimeImpl.h"
-#include "../Input/EventHandler.h"
 #include "../Game/Game.h"
-#include "../Renderer/Renderer.h"
-#include "../Input/InputImpl.h"
-#include "CollisionHandler.h"
 #include "../Game/test.h"
+#include "../Input/EventHandler.h"
+#include "../Input/InputImpl.h"
+#include "../Renderer/Bitmap.h"
+#include "../Renderer/Renderer.h"
+#include "../Renderer/Window.h"
+#include "../Utilities/Constants.h"
+#include "../Utilities/TimeImpl.h"
+#include "../Game/CollisionHandler.h"
 
 using namespace engine;
 
@@ -36,7 +36,7 @@ int main(int, char**)
   event_handler::SetMouseButtonDownCallback(&input::impl::OnMouseButtonDown);
   event_handler::SetMouseButtonUpCallback(&input::impl::OnMouseButtonUp);
   Test();
-  game::Game game;
+  game::Game game(&Exit);
   g_game = &game;
 
   while(g_running)

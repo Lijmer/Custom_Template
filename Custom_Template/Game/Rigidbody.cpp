@@ -1,7 +1,7 @@
 #include "Rigidbody.h"
-#include "Time.h"
-#include "Transform.h"
-#include "Physics.h"
+#include "../Utilities/Time.h"
+#include "../Utilities/Transform.h"
+#include "../Utilities/Physics.h"
 
 Rigidbody::Rigidbody(engine::Transform &t, game::GameObject &g) :
 BaseComponent(RIGIDBODY, t, g),

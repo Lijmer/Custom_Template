@@ -1,6 +1,6 @@
-#include "CollisionHandler.h"
-#include "../Components/Collider.h"
-#include "Collision.h"
+#include "CollisionHandler.h" 
+#include "../Game/Collider.h"
+#include "../Game/Collision.h"
 #include <vector>
 
 namespace collision_handler

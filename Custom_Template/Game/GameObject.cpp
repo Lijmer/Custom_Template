@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#include "../Custom_Template/StringFunctions.h"
+#include "../Utilities/StringFunctions.h"
 
 namespace game
 {

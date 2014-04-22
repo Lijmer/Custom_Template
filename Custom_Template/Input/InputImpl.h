@@ -1,7 +1,7 @@
 #ifndef INCLUDED_INPUT_IMPL_H
 #define INCLUDED_INPUT_IMPL_H
 #include "API.h"
-#include "Types.h"
+#include "../Utilities/Types.h"
 
 namespace input
 {

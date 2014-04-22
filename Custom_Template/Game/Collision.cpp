@@ -2,8 +2,8 @@
 
 #include "CircleCollider.h"
 
-#include "Constants.h"
-#include "Transform.h"
+#include "../Utilities/Constants.h"
+#include "../Utilities/Transform.h"
 #include "../Game/GameObject.h"
 #include "Rigidbody.h"
 #include "Time.h"

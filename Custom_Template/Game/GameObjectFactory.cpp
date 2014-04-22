@@ -1,11 +1,11 @@
 #include "GameObjectFactory.h"
-#include "../Components/BaseComponent.h"
+#include "../Game/BaseComponent.h"
 
 #include "GameObject.h"
 
 #include "../Input/XMLReader.h"
 
-#include "../Components/ComponentFactory.h"
+#include "../Game/ComponentFactory.h"
 
 #include <map>
 

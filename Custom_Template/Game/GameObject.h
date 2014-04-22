@@ -1,8 +1,8 @@
 #ifndef INCLUDED_GAME_OBJECT_H
 #define INCLUDED_GAME_OBJECT_H
 #include "API.h"
-#include "../Custom_Template/Transform.h"
-#include "../Components/ComponentList.h"
+#include "../Utilities/Transform.h"
+#include "../Game/ComponentList.h"
 
 namespace game
 {

@@ -1,4 +1,5 @@
 #include "Time.h"
+#include "TimeImpl.h"
 #include <Windows.h>
 
 static LARGE_INTEGER ticksPerSecond;

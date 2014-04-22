@@ -1,8 +1,8 @@
 #include "CircleCollider.h"
 #include "BoxCollider.h"
 #include "CapsuleCollider.h"
-#include "Transform.h"
-#include "CollisionHandler.h"
+#include "../Utilities/Transform.h"
+#include "../Game/CollisionHandler.h"
 
 CircleCollider::CircleCollider(engine::Transform &t, game::GameObject &g)
 :Collider(CIRCLE_COLLIDER, t, g, CIRCLE)

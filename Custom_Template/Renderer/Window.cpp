@@ -1,6 +1,6 @@
 #include "Window.h"
 #include "WindowImpl.h"
-#include "../Renderer/Bitmap.h"
+#include "Bitmap.h"
 #include <SDL_syswm.h>
 #include <cstdio>
 

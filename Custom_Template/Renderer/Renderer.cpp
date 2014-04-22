@@ -1,9 +1,9 @@
 #include "Renderer.h"
-#include "../Components/SpriteRenderer.h"
-#include "../Components/TextRenderer.h"
+#include "../Game/SpriteRenderer.h"
+#include "../Game/TextRenderer.h"
 #include <vector>
 
-#include "../Custom_Template/Transform.h"
+#include "../Utilities/Transform.h"
 #include "Sprite.h"
 #include "Bitmap.h"
 #include "SpriteDatabase.h"

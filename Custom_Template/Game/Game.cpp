@@ -1,15 +1,14 @@
 #include "Game.h"
 #include "../Renderer/Bitmap.h"
-#include "../Custom_Template/CycleTimer.h"
+#include "../Utilities/CycleTimer.h"
 #include "Time.h"
-#include "../Custom_Template/Types.h"
+#include "../Utilities/Types.h"
 #include "../Input/Input.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
-#include "../Components/SpriteRenderer.h"
+#include "../Game/SpriteRenderer.h"
 #include "GameObjectFactory.h"
 
-#include "../Custom_Template/main.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -17,7 +16,8 @@
 
 namespace game
 {
-  Game::Game()
+  Game::Game(void(*Exit)())
+    :Exit(Exit)
   {
     for(int i = 0; i < 5; ++i)
     {

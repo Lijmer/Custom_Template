@@ -2,7 +2,7 @@
 #define INCLUDED_RIGIDBODY_H
 
 #include "BaseComponent.h"
-#include "float2.h"
+#include "../Utilities/float2.h"
 
 class Rigidbody : public BaseComponent
 {

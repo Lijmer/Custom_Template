@@ -14,7 +14,7 @@ namespace engine
     INPUT_API void SetMouseButtonUpCallback(void(*Functor)(unsigned char));
 
 
-    void Update();
+    INPUT_API void Update();
   };
 }
 

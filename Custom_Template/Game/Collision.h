@@ -1,7 +1,7 @@
 #ifndef INCLUDED_COLLISION_H
 #define INCLUDED_COLLISION_H
 
-#include "float2.h"
+#include "../Utilities/float2.h"
 class Collider;
 
 class Collision

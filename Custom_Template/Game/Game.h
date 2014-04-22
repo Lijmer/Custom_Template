@@ -10,13 +10,13 @@ namespace game
   class Game
   {
   public:
-    GAME_API Game();
+    GAME_API Game(void(*Exit)());
     GAME_API ~Game();
     GAME_API void Update();
     GAME_API void FixedUpdate();
   private:
     std::vector<GameObject*> m_objects;
-
+    void(*Exit)();
   };
 }
 

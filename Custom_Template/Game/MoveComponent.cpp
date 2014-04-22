@@ -1,8 +1,8 @@
 #include "MoveComponent.h"
-#include "Transform.h"
-#include "float2.h"
-#include "time.h"
-#include "Constants.h"
+#include "../Utilities/Transform.h"
+#include "../Utilities/float2.h"
+#include "../Utilities/time.h"
+#include "../Utilities/Constants.h"
 #include "../Game/GameObject.h"
 #include "TextRenderer.h"
 
